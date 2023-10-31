@@ -1,0 +1,38 @@
+.AuthForm__layout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.AuthForm__loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}
+.AuthForm__container {
+    width: 100%;    
+}
+
+@media (min-width: 640px) {
+    .AuthForm__container {
+        width: 40%;       
+    }
+  }
+
+.AuthForm {
+    width: 100%;
+    padding: 20px 40px;  
+    box-sizing: border-box;
+    box-shadow: 5px 5px 10px #f3f4f6
+}
+
+.AuthForm__checkbox {
+    display: flex;
+    align-items: center;
+    color: var(--main-color);
+    font-size: 12px;
+    margin-bottom: 15px;
+}

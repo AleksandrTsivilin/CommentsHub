@@ -1,0 +1,15 @@
+.PageLayout {
+    width: 100%;
+}
+
+.PageLayout__title {
+    margin-bottom: 15px;
+}
+
+.PageLayout__breadcrumbs {
+    margin-bottom: 15px;
+}
+
+.PageLayout__notify {
+    margin-bottom: 15px;
+}

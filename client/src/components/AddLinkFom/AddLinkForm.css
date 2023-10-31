@@ -1,0 +1,46 @@
+.AddLinkForm__container {
+    width: 200px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    z-index: 50;
+    border-radius: 4px;
+    opacity: 0;
+    animation: fadeInAnimation 300ms ease-in forwards;
+    box-shadow: 5px 5px 10px #f3f4f6
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.AddLinkForm__error {
+    font-size: 10px;
+    color: var(--error-color);
+    margin-top: -9px;
+    margin-bottom: 9px;
+}
+
+.Button__close-container {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 6px;
+}
+
+.Button__close {
+    color: #dc2626;
+    cursor: pointer;
+}
+
+.Button__close:hover {
+    color: #b91c1c;
+}
+
+.Button__close:active {
+    color: #b91c1c;
+}

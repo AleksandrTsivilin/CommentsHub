@@ -1,0 +1,57 @@
+.TextField-sm {
+    margin-bottom: 15px;
+}
+
+.TextField-md {
+    margin-bottom: 30px;
+}
+
+.TextField-lg {
+    margin-bottom: 30px;
+}
+
+.TextField__label {
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.error-text-color {
+    color: var(--error-color);
+}
+
+.TextField__input {
+    appearance: none;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 1px solid var(--main-color);
+    margin-bottom: 6px;
+}
+
+.TextField__input-md {
+    padding: 10px 12px;
+}
+
+.TextField__input-sm {
+    padding: 6px 3px;
+    font-size: 10px;
+
+}
+
+.border-red {
+    border-color: var(--error-color);
+}
+
+.TextField__input:focus {
+    border-color: var(--focus-color);
+    outline: none;
+}
+
+.TextField__error-message {
+    font-size: 10px;
+}

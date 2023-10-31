@@ -1,0 +1,11 @@
+.CommentsPage {
+    overflow-x: auto;
+}
+
+.CommentsPage__title-container {
+    margin-bottom: 30px;
+}
+
+.CommentsPage__action-block {
+    margin-bottom: 10px;
+}

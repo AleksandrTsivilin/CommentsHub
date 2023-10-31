@@ -1,0 +1,59 @@
+.CommentItem__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    background-color: var(--main-color);
+    margin-bottom: 6px;
+}
+
+.CommentItem__icon {
+    display: block;
+    color: #fff;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.CommentItem__icon:hover {
+    background-color: #4b5563;
+}
+
+.CommentItem__icon:active {
+    background-color: #030712;
+}
+
+.CommentItem__text {
+    margin-bottom: 10px;
+}
+
+.CommentItem__actions-user {
+    padding-left: 20px;
+}
+
+.CommentItem__parent {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    border-left: 2px solid #e2e8f0;
+    padding: 2px;
+}
+
+.CommentItem__file-wrapper {
+    background-color: #e2e8f0;
+    padding: 5px 10px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.Comment__file {
+    height: 100%;
+}
+
+.CommentItem__img {
+    height: 100%;
+    cursor: pointer;
+}

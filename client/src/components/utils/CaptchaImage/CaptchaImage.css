@@ -1,0 +1,7 @@
+.Captcha__svg {
+    width: 100%;  
+    background-color: #fef3c7;
+    box-sizing: border-box;
+    padding: 1px;
+    border-radius: 2px;
+}

@@ -1,0 +1,13 @@
+.AddCommentPage__parentText {
+    display: -webkit-box;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    box-sizing: border-box;
+    padding: 5px 20px;
+    color: var(--main-color);
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    margin-bottom: 15px;
+}

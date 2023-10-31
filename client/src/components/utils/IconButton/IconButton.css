@@ -1,0 +1,74 @@
+.IconButton-container {
+    display: flex;
+    
+}
+
+.IconButton {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+
+.IconButton-sm {
+    padding: 5px 12px;
+    font-size: 10px;
+}
+
+.IconButton-md {
+    padding: 8px 20px;
+}
+
+.IconButton-lg {
+    padding: 10px 25px;
+}
+
+.IconButton-gray {
+    color: var(--main-color);
+}
+
+.IconButton-red {
+    color: var(--error-color);
+}
+
+.IconButton.IconButton-gray:hover {
+    border-color: var(--main-color);
+}
+
+.IconButton-red:hover {
+    border-color: var(--error-color);
+}
+
+.center {
+    justify-content: center;
+}
+
+.end {
+    justify-content: end;
+}
+
+.full {
+    width: 100%;
+}
+
+.IconButton:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+.Button__close {
+    color: #dc2626;
+    cursor: pointer;
+}
+
+.Button__close:hover {
+    color: #b91c1c;
+}
+
+.Button__close:active {
+    color: #b91c1c;
+}

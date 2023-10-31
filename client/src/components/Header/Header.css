@@ -1,0 +1,31 @@
+.Header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: cadetblue;
+    height: 50px;
+    padding-inline: 20px;
+}
+
+.Header__logo {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 2px 4px;  
+    font-weight: bold;  
+}
+
+.Header__logo:hover {
+    color: red;
+}   
+
+.Header__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}

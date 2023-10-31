@@ -1,0 +1,14 @@
+
+
+.Label {
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.error-text-color {
+    color: var(--error-color);
+}

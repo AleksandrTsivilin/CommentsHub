@@ -1,0 +1,45 @@
+.Comments-Table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 640px;
+    color: var(--main-color);
+    margin-bottom: 30px;
+}
+
+
+.Comments-Table__ceil {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.Comments-Table__rows {
+    cursor: pointer;
+}
+
+.Comments-Table__rows:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.Comments-Table__rows:hover {
+    background-color: #ddd;
+}
+
+
+.Comments-Table__loader {
+    display: flex;
+    justify-content: center;
+}
+
+
+.Comments-Table__message {
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.Comments-Table__comment {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+}

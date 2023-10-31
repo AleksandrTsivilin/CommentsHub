@@ -1,0 +1,16 @@
+.Comments-Table__header {
+    position: relative;
+    padding-left: 10px;
+    padding-right: 25px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    text-wrap: nowrap;
+}
+
+.Comments-Table__header-wrapper {
+    color: #fff;
+    background-color: var(--main-color);
+    width: 100%;
+}
