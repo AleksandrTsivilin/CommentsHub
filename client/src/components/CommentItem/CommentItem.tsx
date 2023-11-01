@@ -53,11 +53,13 @@ export const CommentItem: FC<Props> = ({comment , depth = 0}) => {
                     )} 
                 </div>}
             </div>
-            {comment.children?.map(child => {depth = 0; return (
-                <div key={child.id}>
-                    <CommentItem comment={child} depth={depth + 1} />
-                </div>
-            )})}
+            {comment.children?.map(child => {
+                depth = 0;
+                return (
+                    <div key={child.id}>
+                        <CommentItem comment={child} depth={depth + 1} />
+                    </div>
+                )})}
         </div>
     )
 }

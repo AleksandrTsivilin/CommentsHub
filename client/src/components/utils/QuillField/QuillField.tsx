@@ -33,7 +33,7 @@ export const QuillField: FC<Props> = ({label, file, onChangeFileInput, ...props}
         const handleClick = (event: MouseEvent) => {
 
             if (isOpenAddLinkForm && !refAddLinkForm.current?.contains(event.target)) {
-                setIsOpenAddLinkForm(false)
+                setIsOpenAddLinkForm(false);
             }
         };       
       
@@ -128,10 +128,11 @@ export const QuillField: FC<Props> = ({label, file, onChangeFileInput, ...props}
             )}
 
             <div className='Quill__link-container' ref={refAddLinkForm}>
-                <AddLinkForm 
-                    onClose={() => setIsOpenAddLinkForm(false)}
-                    onSave={(link: string) => helpers.setValue(`${field.value} ${link}`)}
-                />
+                {isOpenAddLinkForm && (
+                    <AddLinkForm 
+                        onClose={() => setIsOpenAddLinkForm(false)}
+                        onSave={(link: string) => helpers.setValue(`${field.value} ${link}`)}
+                    />)}
             </div>
 
         </div>

@@ -12,6 +12,8 @@ body {
   --focus-color: #22d3ee;
   --green-color: #04aa6d;
   --warning-color: #f59e0b;
+
+  --z-header: 50;
 }
 
 code {

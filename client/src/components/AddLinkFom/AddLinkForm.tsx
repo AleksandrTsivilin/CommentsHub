@@ -24,14 +24,20 @@ export const AddLinkForm: FC<Props> = ({onClose, onSave}) => {
             return;
         }
         onSave(`<a href='${url}' alt='${title}'>${title}</a>`);
-        onClose();
+        close();
 
+    }
+
+    const close = () => {
+        setTitle('');
+        setUrl('');
+        onClose();
     }
 
     return (
         <div className='AddLinkForm__container'>                                                
             <div className=''>
-                <IconButton type='button' icon='close' position='end' iconSize='sm' color='red' onClick={onClose} />
+                <IconButton type='button' icon='close' position='end' iconSize='sm' color='red' onClick={close} />
                 
                 <TextField
                     label='title'

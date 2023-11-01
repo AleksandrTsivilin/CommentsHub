@@ -38,7 +38,7 @@ export const CommentsTable = () => {
         setIsLoading(true);
         getComments({sortBy, orderBy, page, limit})
             .then(response => {
-                setComments([])
+                setComments(response.data.rows)
                 setTotal(response.data.count);
             })
             .catch(err => setNotifyState({

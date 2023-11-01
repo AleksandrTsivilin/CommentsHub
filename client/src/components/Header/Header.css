@@ -9,6 +9,7 @@
     background-color: cadetblue;
     height: 50px;
     padding-inline: 20px;
+    z-index: var(--z-header);
 }
 
 .Header__logo {
