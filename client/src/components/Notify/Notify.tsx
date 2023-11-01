@@ -33,7 +33,7 @@ export const Notify: FC<Props> = ({message, status, onClose, children}) => {
             'warning-color': status === 'warning',
             'isActive': message?.length || children
         })}>
-           <p className='single-line-text'>{message}</p>
+           {message && <p className='single-line-text'>{message}</p>}
            {children}
            {onClose && <div className='Notify__close'>
                 <IconButton icon='close' color='red' position='end' iconSize='sm' onClick={onClose}/>
