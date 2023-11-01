@@ -20,9 +20,6 @@ const dbCredentials = {
 
 const dialectConfig = {
   dialect: 'postgres',
-  dialectOptions: {
-    ssl: true
-  }
 };
 
 module.exports = {

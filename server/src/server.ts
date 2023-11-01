@@ -21,7 +21,7 @@ const createAPI = () => {
     const app = express();
 
     const corsOptions = {
-        origin: 'https://localhost:3000',
+        origin: 'http://localhost:3000',
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
         credentials: true
 
@@ -74,7 +74,6 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 export const broadCast = (comment: any) => {
-    console.log('broadcast ********', comment)
     wss.clients.forEach((client: any) => {
         if (client.readyState === WebSocket.OPEN) {
             client.send(JSON.stringify(comment));

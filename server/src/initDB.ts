@@ -12,15 +12,13 @@ export const connectDB = async () => {
       DB_USERNAME = '',
       DB_PASSWORD,
       DB_HOST,
+      DB_PORT
   } = process.env;
-  const DB_URI = `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_NAME}`;
+  const DB_URI = `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
   try {
     const sequelize = new Sequelize(DB_URI, {
       dialect: 'postgres',
       models: [User, Comment],
-      dialectOptions: {
-        ssl: true,
-      },
     });
     
     await sequelize.authenticate();
