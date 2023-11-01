@@ -2,8 +2,8 @@ import { ApiError } from "../exceptions/apiError";
 
 export const  validateXHTML = (message: string) => {
     const tagRegex = /<[^>]*>/g;
-  
     const openTags: string[] = [];
+    
     try {
         message.replace(tagRegex, (match: string) => {
             if (match.startsWith('</')) {
