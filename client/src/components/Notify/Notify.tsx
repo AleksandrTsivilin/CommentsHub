@@ -5,14 +5,18 @@ import classNames from 'classnames';
 import './Notify.css';
 
 interface Props {
-    message: string,
+    message?: string,
     status?: NotifyStatus,
-    onClose: () => void,
+    onClose?: () => void,
+    children?: React.ReactElement
 }
 
-export const Notify: FC<Props> = ({message, status, onClose}) => {
+export const Notify: FC<Props> = ({message, status, onClose, children}) => {
 
     useEffect(() => {
+        if (!onClose) {
+            return;
+        }
         const timerId = setTimeout(() => {
             onClose();
         }, 2000)
@@ -26,12 +30,14 @@ export const Notify: FC<Props> = ({message, status, onClose}) => {
         <div className={classNames('Notify__wrapper', {
             'error-color': status === 'error',
             'success-color': status === 'success',
-            'isActive': message.length
+            'warning-color': status === 'warning',
+            'isActive': message?.length || children
         })}>
            <p className='single-line-text'>{message}</p>
-           <div className='Notify__close'>
+           {children}
+           {onClose && <div className='Notify__close'>
                 <IconButton icon='close' color='red' position='end' iconSize='sm' onClick={onClose}/>
-           </div>
+           </div>}
         </div>
     )
 }

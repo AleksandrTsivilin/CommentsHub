@@ -28,7 +28,7 @@
 
 .Button__close-container {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin-bottom: 6px;
 }
 

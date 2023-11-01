@@ -36,6 +36,10 @@ export const Pagination: FC<Props> = ({total}) => {
   const prevPage = isFirstPage ? 1 : currentPage - 1;   
   const nextPage = isLastPage ? pages.length : currentPage + 1;  
 
+  if (pages.length <=1) {
+    return null;
+  }
+ 
   return (
     <section className="Pagination">
       <SearchLink

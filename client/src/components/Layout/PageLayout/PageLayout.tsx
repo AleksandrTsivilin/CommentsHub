@@ -6,6 +6,8 @@ import { Title } from '../../utils/Title'
 import { IconButton } from '../../utils/IconButton'
 import { Notify } from '../../Notify'
 import './PageLayout.css'
+import { useWebsocketContext } from '../../../Context/WebsocketContext/useWebsocketContext'
+import { LoaderPoints } from '../../utils/LoaderPoints'
 
 interface Props {
     title: string,
@@ -16,7 +18,8 @@ interface Props {
 
 export const PageLayout: FC<Props> = ({title, isHomPage=false, children}) => {
     const navigate = useNavigate();
-    const { notifyState ,setNotifyState} = useNotifyContext();
+    const { notifyState, setNotifyState} = useNotifyContext();
+    const { isReady } = useWebsocketContext();
     const {isAuth} = useAuthContext();
     
     useEffect(() => {
@@ -36,6 +39,14 @@ export const PageLayout: FC<Props> = ({title, isHomPage=false, children}) => {
             <div className='PageLayout__breadcrumbs'>
                 {!isHomPage && <IconButton icon='back' position='start' iconSize='sm' color='gray' onClick={breadCrumbsHandler} />}
             </div>
+
+            {!isReady && (
+                <Notify status='warning'>
+                    <div className='PageLayout__connect-state'>
+                        <p>Connecting</p>
+                        <LoaderPoints />
+                    </div>
+                </Notify>)}
 
             <div className='PageLayout__notify'>
                 {!!notifyState.message && <Notify message={notifyState.message} status={notifyState.status} onClose={() => setNotifyState({

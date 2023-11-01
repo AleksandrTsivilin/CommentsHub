@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { NotifyState } from '../../types/NotifyState';
 
-export type NotifyStatus = null | 'error' | 'success' 
+export type NotifyStatus = null | 'error' | 'success' | 'warning'
 
 
 

@@ -11,6 +11,7 @@ body {
   --error-color: #ef4444;
   --focus-color: #22d3ee;
   --green-color: #04aa6d;
+  --warning-color: #f59e0b;
 }
 
 code {

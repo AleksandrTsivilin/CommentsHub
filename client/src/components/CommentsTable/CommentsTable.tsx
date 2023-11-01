@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import moment from 'moment';
 import { useWebsocketContext } from '../../Context/WebsocketContext/useWebsocketContext';
+import { useNotifyContext } from '../../Context/NotifyContext/useNotifyContext';
 import { getComments } from '../../api/commentsApi';
 import { CommentInfo } from '../../types/commentInfo';
 import { Loader } from '../utils/Loader';
 import { CommentsTableHeader } from '../CommentsTableHeader';
 import { Pagination } from '../Pagination';
 import './CommentsTable.css';
-import { useNotifyContext } from '../../Context/NotifyContext/useNotifyContext';
 
 
 export const CommentsTable = () => {
@@ -38,7 +38,7 @@ export const CommentsTable = () => {
         setIsLoading(true);
         getComments({sortBy, orderBy, page, limit})
             .then(response => {
-                setComments(response.data.rows)
+                setComments([])
                 setTotal(response.data.count);
             })
             .catch(err => setNotifyState({

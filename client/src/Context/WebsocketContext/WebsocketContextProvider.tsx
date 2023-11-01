@@ -18,12 +18,11 @@ export const WebsocketProvider: FC<Props> = memo(({children}) => {
     const connect = useCallback(() => {
       const socket = new WebSocket("ws://localhost:8000");
   
-      socket.onopen = () => {console.log('onopen'); setIsReady(true) };
+      socket.onopen = () => setIsReady(true);
       socket.onclose = () => {
         setIsReady(false); 
         setTimeout(()=>{connect()}, RECONNECT_DELAY); 
       }
-      socket.onerror = () => {console.log('error')}
       socket.onmessage = (event) => { setComment(event.data)};
   
       ws.current = socket;

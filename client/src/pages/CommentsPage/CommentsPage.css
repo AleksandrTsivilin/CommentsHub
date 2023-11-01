@@ -1,5 +1,6 @@
 .CommentsPage {
     overflow-x: auto;
+    padding: 5px 0;
 }
 
 .CommentsPage__title-container {
