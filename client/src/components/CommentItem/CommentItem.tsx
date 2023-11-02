@@ -39,7 +39,12 @@ export const CommentItem: FC<Props> = ({comment , depth = 0}) => {
             <div className='CommentItem__file-wrapper'>
                 {comment.fileUrl && <div className='Comment__file'>
                     {comment.fileUrl.split('.')[1] === 'txt' ? (
-                        <a href={`${BASE_URL}/${comment.fileUrl}`} target="_blank" rel="noreferrer">
+                        <a 
+                            href={`${BASE_URL}/${comment.fileUrl}`} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className='CommentItem__txt'
+                        >
                             <FontAwesomeIcon icon={faFileLines} style={{color: "#1f2937",}} />
                         </a>
                     ) : (
@@ -48,7 +53,7 @@ export const CommentItem: FC<Props> = ({comment , depth = 0}) => {
                             data-lightbox="my-gallery"
                             data-title={comment.fileUrl}
                         >   
-                            <img width={30}  src={`${BASE_URL}/${comment.fileUrl}`} alt={comment.fileUrl}  />
+                            <img className='CommentItem__img' src={`${BASE_URL}/${comment.fileUrl}`} alt={comment.fileUrl}  />
                         </a>
                     )} 
                 </div>}
