@@ -23,11 +23,12 @@ services:
     image: aleksandr751/commentshub-api:v-1
     container_name: comments-api
     environment:
+      
       DB_PASSWORD: ${DB_PASSWORD}
-      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_USERNAME: ${DB_USERNAME}
       DB_HOST: postgres
-      DB_NAME: ${DB_NAME:-CommentsDB} 
-      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME} 
+      DB_PORT: 5432
       PORT: 8000
       TOKEN_SECRET_KEY: ${TOKEN_SECRET_KEY}
       
@@ -51,17 +52,17 @@ services:
   postgres:
     image: 'postgres'
     container_name: postgresDB
-    ports:
-      - '${DB_PORT}:${DB_PORT}'
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_DB: ${DB_NAME:-CommentsDB}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - '5432:5432'
     networks:
     - myNetwork
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d ${DB_NAME:-CommentsDB} -U ${DB_USERNAME:-postgres}"]
+      test: ["CMD-SHELL", "pg_isready -d ${DB_NAME} -U ${DB_USERNAME}"]
       interval: 1m30s
       timeout: 30s
       retries: 5
