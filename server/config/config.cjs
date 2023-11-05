@@ -20,6 +20,13 @@ const dbCredentials = {
 
 const dialectConfig = {
   dialect: 'postgres',
+  dialectOptions: {
+    ssl: true
+  }
+};
+
+const dialectConfigDocker = {
+  dialect: 'postgres',
 };
 
 module.exports = {
@@ -36,6 +43,11 @@ module.exports = {
   production: {
     ...dbCredentials,
     ...dialectConfig,
+    seederStorage: 'sequelize',
+  },
+  docker: {
+    ...dbCredentials,
+    ...dialectConfigDocker,
     seederStorage: 'sequelize',
   }
 };

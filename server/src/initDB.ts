@@ -14,15 +14,26 @@ export const connectDB = async () => {
       DB_HOST,
       DB_PORT
   } = process.env;
+
+  let dialectOptions;
+
+  if (process.env.NODE_ENV !== 'docker') {
+    dialectOptions = {
+      ssl: true
+    }
+  }
+
   const DB_URI = `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
   try {
     const sequelize = new Sequelize(DB_URI, {
       dialect: 'postgres',
       models: [User, Comment],
+      dialectOptions
     });
     
     await sequelize.authenticate();
     } catch (error) {
+      console.log('db error', error)
       throw ApiError.internal();
   }
 }
