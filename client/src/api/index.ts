@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 
 const apiPORT = process.env.REACT_APP_API_PORT;
-export const BASE_URL = `http://localhost:${apiPORT}`;
+export const BASE_URL = process.env.REACT_APP_API_URL ||  `http://localhost:${apiPORT}`;
 
 
 const client = axios.create({

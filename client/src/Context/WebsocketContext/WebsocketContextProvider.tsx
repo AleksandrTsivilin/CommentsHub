@@ -3,6 +3,9 @@ import {Props as WebSocketStateProps, WebsocketContext} from './WebsocketContext
 import { RECONNECT_DELAY } from "../../constants/constants";
 
 const apiPORT = process.env.REACT_APP_API_PORT;
+const apiURL = process.env.REACT_APP_API_URL 
+  ? process.env.REACT_APP_API_URL.replace('https', 'wss') 
+  : `ws://localhost:${apiPORT}`;
 
 interface Props {
     children: React.ReactNode
@@ -16,7 +19,7 @@ export const WebsocketProvider: FC<Props> = memo(({children}) => {
     const ws = useRef<WebSocket | null>(null);
   
     const connect = useCallback(() => {
-      const socket = new WebSocket(`ws://localhost:${apiPORT}`);
+      const socket = new WebSocket(apiURL);
   
       socket.onopen = () => setIsReady(true);
       socket.onclose = () => {
