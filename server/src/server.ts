@@ -21,7 +21,7 @@ const createAPI = () => {
     const app = express();
 
     const corsOptions = {
-        origin: 'http://localhost:3000',
+        origin: ['http://localhost:3000', 'https://comments-hub.onrender.com/'],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
         credentials: true
 
