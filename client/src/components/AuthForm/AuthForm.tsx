@@ -7,13 +7,13 @@ import { useNotifyContext } from "../../Context/NotifyContext/useNotifyContext";
 import { login, register } from "../../api/userApi";
 import { Button } from "../utils/Button"
 import { Captcha } from "../utils/Captcha"
-import { Loader } from "../utils/Loader"
 import { TextField } from "../utils/TextField"
 import { getTokenData } from "../../helpers/jwt";
 import { TokenData } from "../../types/tokenData";
 import { UserAuthAttrs } from "../../types/userAuthAttrs";
 import './AuthForm.css';
 import { isNotWhitespace } from "../../helpers/isNotWhitespace";
+import { FormLayout } from "../Layout/FormLayout";
 
 interface Props {
     isRegister: boolean,
@@ -87,81 +87,72 @@ export const AuthForm: FC<Props> = ({isRegister, setIsRegister}) => {
         }
     }
 
-    return (
-        <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={submitHandler}
-            >
-                {formik => (
-                    <div className="AuthForm__layout">
-                        <div className='AuthForm__loader-wrapper'>
-                            {formik.isSubmitting && <Loader />}
-                        </div>
+    return (       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={submitHandler}
+        >
+            {formik => (
+                <FormLayout isLoading={formik.isSubmitting}>
+                    <Form className='AuthForm'>
+                        {isRegister && <TextField
+                            label='user name'
+                            name='userName'
+                            placeholder='Enter user name'
+                            invalid={!!formik.errors.userName && formik.touched.userName}
+                        />}
 
-                        <div className='AuthForm__container'>                      
-                            
-                            <Form className='AuthForm'>
-                                {isRegister && <TextField
-                                    label='user name'
-                                    name='userName'
-                                    placeholder='Enter user name'
-                                    invalid={!!formik.errors.userName && formik.touched.userName}
-                                />}
+                        <TextField
+                            label='email'
+                            name='email'
+                            placeholder='Enter email'
+                            invalid={!!formik.errors.email && formik.touched.email}
+                        />
 
-                                <TextField
-                                    label='email'
-                                    name='email'
-                                    placeholder='Enter email'
-                                    invalid={!!formik.errors.email && formik.touched.email}
-                                />
+                        <TextField
+                            label='password'
+                            name='password'
+                            type='password'
+                            placeholder='Enter password'
+                            invalid={!!formik.errors.password && formik.touched.password}
+                        />
 
-                                <TextField
-                                    label='password'
-                                    name='password'
-                                    type='password'
-                                    placeholder='Enter password'
-                                    invalid={!!formik.errors.password && formik.touched.password}
-                                />
+                        {isRegister && (
+                            <TextField
+                                label='confirm password'
+                                name='confirmPassword'
+                                placeholder='Enter confirm password'
+                                type='password'
+                                invalid={!!formik.errors.confirmPassword && formik.touched.confirmPassword}
+                            />)}                         
 
-                                {isRegister && (
-                                    <TextField
-                                        label='confirm password'
-                                        name='confirmPassword'
-                                        placeholder='Enter confirm password'
-                                        type='password'
-                                        invalid={!!formik.errors.confirmPassword && formik.touched.confirmPassword}
-                                    />)}                         
+                        <Captcha 
+                            label='enter code'
+                            name='captcha'
+                            placeholder='Enter code'
+                            reload={reloadCaptcha}
+                            invalid={!!formik.errors.captcha && formik.touched.captcha}
+                        />
 
-                                <Captcha 
-                                    label='enter code'
-                                    name='captcha'
-                                    placeholder='Enter code'
-                                    reload={reloadCaptcha}
-                                    invalid={!!formik.errors.captcha && formik.touched.captcha}
-                                />
+                        <label className='AuthForm__checkbox'>
+                            <input
+                                type='checkbox'
+                                checked={isRegister}
+                                onChange={(e) => setIsRegister(e.target.checked)}
+                            />
+                            I don't have an account. Create account.
+                        </label>
 
-                                <label className='AuthForm__checkbox'>
-                                    <input
-                                        type='checkbox'
-                                        checked={isRegister}
-                                        onChange={(e) => setIsRegister(e.target.checked)}
-                                    />
-                                    I don't have an account. Create account.
-                                </label>
-
-                                <Button
-                                    text={isRegister ? 'sign up' : 'sign in'}
-                                    type='submit'
-                                    disabled={formik.isSubmitting}
-                                />
-                            </Form>
-                        </div>
-                    </div>
-                )}
-            </Formik> 
+                        <Button
+                            text={isRegister ? 'sign up' : 'sign in'}
+                            type='submit'
+                            disabled={formik.isSubmitting}
+                        />
+                    </Form>
+                </FormLayout>
+            )}
+        </Formik>        
         
-        </>
     )
 }

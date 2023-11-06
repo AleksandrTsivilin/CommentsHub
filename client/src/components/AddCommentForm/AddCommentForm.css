@@ -1,23 +1,27 @@
-.AddCommentForm__container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-}
 
 .AddCommentForm {
     width: 100%;
+    padding: 20px 40px;  
+    box-sizing: border-box;
+    box-shadow: 5px 5px 10px #f3f4f6
 }
 
 @media (min-width: 640px) {
+    .AddCommentForm {
+        width: 75%;
+    }
+}
+
+@media (min-width: 768px) {
+    .AddCommentForm {
+        width: 60%;
+    }
+}
+
+@media (min-width: 1024px) {
     .AddCommentForm {
         width: 40%;
     }
 }
 
-.AddCommentForm__loader-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 

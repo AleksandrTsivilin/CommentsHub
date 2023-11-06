@@ -1,0 +1,13 @@
+.FormLayout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.FormLayout__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}

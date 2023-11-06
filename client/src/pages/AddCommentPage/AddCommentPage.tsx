@@ -25,7 +25,7 @@ export const AddCommentPage: FC<Props> = () => {
     return (
         
         <PageLayout title='Create comment'>
-            <div style={{width: '100%'}}>
+            <>
                 {parentCommentText && (
                     <p 
                         dangerouslySetInnerHTML={{ __html: parentCommentText }} 
@@ -33,7 +33,7 @@ export const AddCommentPage: FC<Props> = () => {
                     ></p>
                 )}
                 <AddCommentForm parentCommentId={parentCommentId}/>
-            </div>
+            </>
         </PageLayout>
         
     )

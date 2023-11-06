@@ -4,9 +4,9 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { create } from '../../api/commentsApi';
 import { useNotifyContext } from '../../Context/NotifyContext/useNotifyContext';
+import { FormLayout } from '../Layout/FormLayout';
 import { Button } from '../../components/utils/Button';
 import { Captcha } from '../../components/utils/Captcha';
-import { Loader } from '../../components/utils/Loader';
 import { TextField } from '../../components/utils/TextField';
 import {QuillField} from '../../components/utils/QuillField';
 import './AddCommentForm.css';
@@ -72,9 +72,6 @@ export const AddCommentForm: FC<Props> = ({parentCommentId}) => {
         }
     }
 
-
-
-
     return (           
         <Formik
             initialValues={initialValues}
@@ -83,45 +80,39 @@ export const AddCommentForm: FC<Props> = ({parentCommentId}) => {
         >
             {formik => (
 
-                <>
-                    <div className='AddCommentForm__loader-wrapper'>
-                        {formik.isSubmitting && <Loader />}
-                    </div>
+                <FormLayout isLoading={formik.isSubmitting}>
+                    <Form className='AddCommentForm'>
 
-                    <div className='AddCommentForm__container'>                                                
-                        <Form className='AddCommentForm'>
+                        <QuillField 
+                            label="Leave your comment" 
+                            onChangeFileInput={setFile} 
+                            file={file}
+                            name='text' 
+                        />
 
-                            <QuillField 
-                                label="Leave your comment" 
-                                onChangeFileInput={setFile} 
-                                file={file}
-                                name='text' 
-                            />
-
-                            <TextField
-                                label='home page'
-                                name='homePage'
-                                placeholder='Enter url home page'
-                                invalid={!!formik.errors.homePage && formik.touched.homePage}
-                            />
+                        <TextField
+                            label='home page'
+                            name='homePage'
+                            placeholder='Enter url home page'
+                            invalid={!!formik.errors.homePage && formik.touched.homePage}
+                        />
 
 
-                            <Captcha 
-                                label='enter code'
-                                name='captcha'
-                                placeholder='Enter code'
-                                invalid={!!formik.errors.captcha && formik.touched.captcha}
-                                reload={reloadCaptcha}
-                            />
+                        <Captcha 
+                            label='enter code'
+                            name='captcha'
+                            placeholder='Enter code'
+                            invalid={!!formik.errors.captcha && formik.touched.captcha}
+                            reload={reloadCaptcha}
+                        />
 
-                            <Button
-                                text='add comment'
-                                type='submit'
-                                disabled={formik.isSubmitting}
-                            />
-                        </Form>
-                    </div>
-                </>
+                        <Button
+                            text='add comment'
+                            type='submit'
+                            disabled={formik.isSubmitting}
+                        />
+                    </Form>
+                </FormLayout>
             )}
         </Formik>
     )
