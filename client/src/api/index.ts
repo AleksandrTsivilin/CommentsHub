@@ -18,7 +18,7 @@ client.interceptors.request.use( (config: InternalAxiosRequestConfig) => {
         const connectionId = localStorageHelper.getItem("CONNECTION_ID");
 
         if (connectionId) {            
-            Cookies.set('connectionId', connectionId , { expires: 7, path: '/' });
+            Cookies.set('connectionId', connectionId , { expires: 7, sameSite: 'None', path: '/' });
         }
 
         if (token) {
