@@ -1,4 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
+import Cookies from 'js-cookie';
+import { localStorageHelper } from "../helpers/localStorageHelper";
+
 
 const apiPORT = process.env.REACT_APP_API_PORT;
 export const BASE_URL = process.env.REACT_APP_API_URL ||  `http://localhost:${apiPORT}`;
@@ -11,16 +14,21 @@ const client = axios.create({
 
 client.interceptors.request.use( (config: InternalAxiosRequestConfig) => {
     if (config.method === 'post' &&  config.baseURL === `${BASE_URL}` && config.url === '/') {
-        const token = localStorage.getItem('token');
+        const token = localStorageHelper.getItem("TOKEN");
+        const connectionId = localStorageHelper.getItem("CONNECTION_ID");
+
+        if (connectionId) {            
+            Cookies.set('connectionId', connectionId , { expires: 7, path: '/' });
+        }
+
         if (token) {
-            const parsedToken = JSON.parse(token);
             config.headers = config.headers || {};
-            config.headers.Authorization = `Bearer ${parsedToken}`;
+            config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
     }
     return config;
-})
+});
 
 client.interceptors.response.use(
     (response) => {

@@ -1,6 +1,8 @@
 import React, {FC, memo, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {Props as WebSocketStateProps, WebsocketContext} from './WebsocketContext';
 import { RECONNECT_DELAY } from "../../constants/constants";
+import { CommentInfo } from "../../types/commentInfo";
+import { localStorageHelper } from "../../helpers/localStorageHelper";
 
 const apiPORT = process.env.REACT_APP_API_PORT;
 const apiURL = process.env.REACT_APP_API_URL 
@@ -14,19 +16,27 @@ interface Props {
 export const WebsocketProvider: FC<Props> = memo(({children}) => {
 
     const [isReady, setIsReady] = useState(false);
-    const [comment, setComment] = useState(null);
+    const [comment, setComment] = useState<CommentInfo | null>(null);
   
     const ws = useRef<WebSocket | null>(null);
   
     const connect = useCallback(() => {
       const socket = new WebSocket(apiURL);
-  
+      
       socket.onopen = () => setIsReady(true);
       socket.onclose = () => {
         setIsReady(false); 
         setTimeout(()=>{connect()}, RECONNECT_DELAY); 
       }
-      socket.onmessage = (event) => { setComment(event.data)};
+      socket.onmessage = (event) => { 
+          const data = event.data;
+          const parsedData = JSON.parse(data);
+          if (parsedData.type === 'info') {
+            localStorageHelper.setItem("CONNECTION_ID", parsedData.clientId);
+            return;
+          }
+          setComment(parsedData)
+      };
   
       ws.current = socket;
   

@@ -15,7 +15,6 @@ export const CommentDetailPage = () => {
     const [comment, setComment] = useState<CommentInfo | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
-
     useEffect(() => {
         const id = pathname.slice(1);
         if (id) {

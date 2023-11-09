@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../api';
+import { useWebsocketContext } from '../../Context/WebsocketContext/useWebsocketContext';
 import { CommentInfo } from '../../types/commentInfo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDots, faFileLines } from '@fortawesome/free-solid-svg-icons';
@@ -13,9 +14,44 @@ interface Props {
     depth?: number
 }
 
-export const CommentItem: FC<Props> = ({comment , depth = 0}) => {
+export const CommentItem: FC<Props> = ({comment:initialComment , depth = 0}) => {
     const navigate = useNavigate();
     const shift = depth * 50;
+    const { comment: newComment } = useWebsocketContext();
+    const [comment, setComment] = useState(initialComment);
+
+    useEffect(() => {
+        if (!newComment) {
+            return;
+        }
+        
+        setComment(prev => {
+            if (prev.id !== newComment.parentId) {
+                return prev;
+            }
+
+            const commentWithParent = {...newComment, parent: {text: prev.text}};
+
+            const updatedChildren = prev.children 
+                ? [commentWithParent, ...prev.children] 
+                : [commentWithParent];
+
+            // let updatedChildren;
+
+            // if (prev.children){
+            //     updatedChildren = [{...newComment, parent: {text: prev.text}}, ...prev.children];
+            // }
+            // else 
+            //     {
+            //         updatedChildren = [{...newComment, parent: {text: prev.text}}];
+            // }
+            return  {
+                ...prev,
+                children: updatedChildren,
+            }
+        });           
+    }, [newComment]);
+    
     return (
         <div style={{paddingLeft: `${shift}px`}}>
             <div className='CommentItem__actions'>

@@ -24,8 +24,7 @@ export const CommentsTable = () => {
         if (!comment) {
             return;
         }
-        const newComment = JSON.parse(comment);
-        setComments(prev => [newComment, ...prev]);
+        setComments(prev => [comment, ...prev]);
     }, [comment])
 
 

@@ -11,9 +11,10 @@ import { TextField } from "../utils/TextField"
 import { getTokenData } from "../../helpers/jwt";
 import { TokenData } from "../../types/tokenData";
 import { UserAuthAttrs } from "../../types/userAuthAttrs";
-import './AuthForm.css';
 import { isNotWhitespace } from "../../helpers/isNotWhitespace";
 import { FormLayout } from "../Layout/FormLayout";
+import { localStorageHelper } from "../../helpers/localStorageHelper";
+import './AuthForm.css';
 
 interface Props {
     isRegister: boolean,
@@ -51,7 +52,7 @@ export const AuthForm: FC<Props> = ({isRegister, setIsRegister}) => {
         try{
             const token = await auth(isRegister, {...values});
             const tokenData: TokenData = getTokenData(token.data.token);
-            localStorage.setItem('token', JSON.stringify(token.data.token));
+            localStorageHelper.setItem("TOKEN", token.data.token);
             setUserName(tokenData.userName);
             setIsAuth(true);
             setNotifyState({
