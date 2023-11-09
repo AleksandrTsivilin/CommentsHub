@@ -85,8 +85,8 @@ class CommentsController {
         }
 
         const comment = await commentsService.create({...commentData, fileUrl: filePath, userId});   
-      
-        broadCast({...comment?.dataValues, user});     
+        const connectionId = req.cookies.connectionId;
+        broadCast({...comment?.dataValues, user: {userName: user?.dataValues.userName, email: user?.dataValues.email}}, connectionId);     
         return res.status(201).send(comment);   
 
       } catch (e: any) {

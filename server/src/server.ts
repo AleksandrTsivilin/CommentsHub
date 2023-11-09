@@ -9,12 +9,10 @@ import { captchaRouter } from './routes/captcha.route';
 import { authRouter } from './routes/auth.route';
 import { errorHandler } from './middlewares/errorHandler.middleware';
 import { commentsRouter } from './routes/comments.route';
-import fs from 'fs';
+import { v4 as uuidv4 } from 'uuid';
 
-declare module 'express-session' {
-    interface SessionData {
-      captchaText?: string; 
-    }
+interface CustomWebSocket extends WebSocket {
+  connectionId: string;
 }
 
 const createAPI = () => {
@@ -43,40 +41,34 @@ const createAPI = () => {
     return app;
 }
 
-
-
-
 export const server = http.createServer(createAPI());
 
 const wss = new WebSocket.Server({ noServer: true });
 
-wss.on('connection', (ws: any) => {
-  
-  ws.on('message', (message: any) => {
-    const formObj: {
-        [key: string] : any
-    } = {};
-    message.forEach((value: any, key: string) => {
-        formObj[key] = value;
-    });
 
-  });
+wss.on('connection', (ws: CustomWebSocket) => {
+    const clientId = uuidv4();
+    ws.connectionId = clientId;
+    ws.send(JSON.stringify({ clientId, type: 'info' }));
   
-  ws.on('close', () => {
-  });
+    ws.on('close', () => { });
 });
 
 server.on('upgrade', (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, ws => {
-      wss.emit('connection', ws, request);
+        wss.emit('connection', ws, request);
     });
 });
 
-export const broadCast = (comment: any) => {
+export const broadCast = (comment: any, connectionId: string) => {
     wss.clients.forEach((client: any) => {
+
         if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify(comment));
+            if (client.connectionId !== connectionId) {
+                client.send(JSON.stringify(comment));
+            }
         }
+
     });
 }
 

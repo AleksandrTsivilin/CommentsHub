@@ -33,7 +33,6 @@ export const connectDB = async () => {
     
     await sequelize.authenticate();
     } catch (error) {
-      console.log('db error', error)
       throw ApiError.internal();
   }
 }

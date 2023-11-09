@@ -2,7 +2,7 @@ import { FileArray, UploadedFile } from "express-fileupload";
 import sharp from "sharp";
 import { v4 as uuidv4 } from 'uuid';
 import { FileOptions } from '../constants';
-import path, { resolve } from "path";
+import path from "path";
 import fs from 'fs';
 import { ApiError } from "../exceptions/apiError";
 

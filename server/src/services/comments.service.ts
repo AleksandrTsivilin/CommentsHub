@@ -34,7 +34,7 @@ class CommentsService {
     async get ({...options}) {
         try {
             return await Comment.findAndCountAll(
-                {...options, include: [{model: User, as: 'user'}]}                
+                {...options, include: [{model: User, as: 'user', attributes:['userName', 'email']}]}                
             )
 
         } catch (e: any) {
@@ -54,13 +54,13 @@ class CommentsService {
         const comment = await Comment.findByPk(id, {
           include: [
             {
-              model: Comment,
-              as: 'children',
-              include: [{
-                    model: User,
-                    as: 'user'
-                }
-              ]
+                model: Comment,
+                as: 'children',
+                    include: [{
+                        model: User,
+                        as: 'user'
+                    }
+                ],
             },{
                 model: Comment,
                 as: 'parent',
@@ -70,7 +70,7 @@ class CommentsService {
                 }]
             }, {
                 model: User,
-                as: 'user'
+                as: 'user',
             }
           ],
         });
@@ -84,7 +84,9 @@ class CommentsService {
                 const childComment = await this.getCommentHierarchy(child.id);
                 childComments.push(childComment);
             }
-            comment.dataValues.children = childComments;
+            comment.dataValues.children = childComments.sort((a, b) => {
+                return b?.createdAt - a?.createdAt
+            });
         }
       
         return comment;
