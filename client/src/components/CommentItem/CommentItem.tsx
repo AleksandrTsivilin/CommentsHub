@@ -18,9 +18,16 @@ export const CommentItem: FC<Props> = ({comment:initialComment , depth = 0}) => 
     const navigate = useNavigate();
     const shift = depth * 50;
     const { comment: newComment } = useWebsocketContext();
-    const [comment, setComment] = useState(initialComment);
+    const [ comment, setComment ] = useState(initialComment);
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
+
+        if (!isMounted) {
+            setIsMounted(true);
+            return;
+        }
+
         if (!newComment) {
             return;
         }
@@ -36,21 +43,14 @@ export const CommentItem: FC<Props> = ({comment:initialComment , depth = 0}) => 
                 ? [commentWithParent, ...prev.children] 
                 : [commentWithParent];
 
-            // let updatedChildren;
-
-            // if (prev.children){
-            //     updatedChildren = [{...newComment, parent: {text: prev.text}}, ...prev.children];
-            // }
-            // else 
-            //     {
-            //         updatedChildren = [{...newComment, parent: {text: prev.text}}];
-            // }
             return  {
                 ...prev,
                 children: updatedChildren,
             }
         });           
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [newComment]);
+
     
     return (
         <div style={{paddingLeft: `${shift}px`}}>

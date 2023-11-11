@@ -26,7 +26,6 @@ export const CommentDetailPage = () => {
         }
     }, [pathname, setNotifyState]);
 
-
     return (
         
         <PageLayout title='Comment details'>

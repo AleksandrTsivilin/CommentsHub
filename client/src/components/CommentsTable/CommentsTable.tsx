@@ -20,14 +20,6 @@ export const CommentsTable = () => {
     const [searchParams] = useSearchParams();
     const {comment} = useWebsocketContext();
 
-    useEffect(() =>{
-        if (!comment) {
-            return;
-        }
-        setComments(prev => [comment, ...prev]);
-    }, [comment])
-
-
     useEffect(() => {
         const sortBy = searchParams.get('sortBy') || undefined;
         const orderBy = searchParams.get('orderBy') || undefined;
@@ -46,6 +38,13 @@ export const CommentsTable = () => {
             }))
             .finally(() => setIsLoading(false));
     }, [searchParams, setNotifyState]);
+
+    useEffect(() =>{
+        if (!comment || comment.parentId) {
+            return;
+        }
+        setComments(prev => [comment, ...prev]);
+    }, [comment])
 
     if (isLoading) {
         return (

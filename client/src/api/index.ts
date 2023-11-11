@@ -12,14 +12,15 @@ const client = axios.create({
     baseURL: BASE_URL,    
 });
 
-client.interceptors.request.use( (config: InternalAxiosRequestConfig) => {
+client.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     if (config.method === 'post' &&  config.baseURL === `${BASE_URL}` && config.url === '/') {
         const token = localStorageHelper.getItem("TOKEN");
         const connectionId = localStorageHelper.getItem("CONNECTION_ID");
-
         if (connectionId) {            
-            Cookies.set('connectionId', connectionId , { expires: 7, sameSite: 'None', path: '/', domain: '.onrender.com', secure: true});
+            
+            Cookies.set('connectionId', connectionId)
         }
+        
 
         if (token) {
             config.headers = config.headers || {};

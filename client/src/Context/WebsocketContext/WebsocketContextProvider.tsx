@@ -32,13 +32,17 @@ export const WebsocketProvider: FC<Props> = memo(({children}) => {
           const data = event.data;
           const parsedData = JSON.parse(data);
           if (parsedData.type === 'info') {
-            localStorageHelper.setItem("CONNECTION_ID", parsedData.clientId);
+            localStorageHelper.setItem("CONNECTION_ID", parsedData.connectionId);
             return;
           }
           setComment(parsedData)
       };
   
       ws.current = socket;
+
+      window.addEventListener('beforeunload', () => {
+        socket.close();
+      });
   
     }, []);
 
