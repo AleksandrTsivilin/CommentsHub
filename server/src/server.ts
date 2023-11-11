@@ -19,7 +19,7 @@ const createAPI = () => {
     const app = express();
 
     const corsOptions = {
-        origin: ['http://localhost:3000', 'https://comments-hub.onrender.com'],
+        origin: ['http://localhost:3000', 'https://comments-hub.onrender.com', 'https://comments-8q992x4lg-aleksandrtsivilin.vercel.app'],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
         credentials: true
     };
@@ -47,11 +47,11 @@ const wss = new WebSocket.Server({ noServer: true });
 
 
 wss.on('connection', (ws: CustomWebSocket) => {
-    const clientId = uuidv4();
-    ws.connectionId = clientId;
-    ws.send(JSON.stringify({ clientId, type: 'info' }));
+    const connectionId = uuidv4();
+    ws.connectionId = connectionId;
+    ws.send(JSON.stringify({ connectionId, type: 'info' }));
   
-    ws.on('close', () => { });
+    ws.on('close', () => {});
 });
 
 server.on('upgrade', (request, socket, head) => {
@@ -61,6 +61,7 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 export const broadCast = (comment: any, connectionId: string) => {
+
     wss.clients.forEach((client: any) => {
 
         if (client.readyState === WebSocket.OPEN) {
