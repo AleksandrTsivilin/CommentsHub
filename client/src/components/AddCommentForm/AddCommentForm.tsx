@@ -92,8 +92,10 @@ export const AddCommentForm: FC<Props> = ({parentCommentId}) => {
 
                         <TextField
                             label='home page'
+                            type='text'
                             name='homePage'
                             placeholder='Enter url home page'
+                            disabled={formik.isSubmitting}
                             invalid={!!formik.errors.homePage && formik.touched.homePage}
                         />
 

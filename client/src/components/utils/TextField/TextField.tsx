@@ -42,7 +42,6 @@ export const TextField: FC<Props> = ({
                     }
                 )}
 
-                type='text' 
                 id={name} 
                 name={name}
                 placeholder={placeholder} 

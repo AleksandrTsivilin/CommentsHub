@@ -101,13 +101,16 @@ export const AuthForm: FC<Props> = ({isRegister, setIsRegister}) => {
                             label='user name'
                             name='userName'
                             placeholder='Enter user name'
+                            disabled={formik.isSubmitting}
                             invalid={!!formik.errors.userName && formik.touched.userName}
                         />}
 
                         <TextField
                             label='email'
+                            type='text'
                             name='email'
                             placeholder='Enter email'
+                            disabled={formik.isSubmitting}
                             invalid={!!formik.errors.email && formik.touched.email}
                         />
 
@@ -116,6 +119,7 @@ export const AuthForm: FC<Props> = ({isRegister, setIsRegister}) => {
                             name='password'
                             type='password'
                             placeholder='Enter password'
+                            disabled={formik.isSubmitting}
                             invalid={!!formik.errors.password && formik.touched.password}
                         />
 
@@ -125,6 +129,7 @@ export const AuthForm: FC<Props> = ({isRegister, setIsRegister}) => {
                                 name='confirmPassword'
                                 placeholder='Enter confirm password'
                                 type='password'
+                                disabled={formik.isSubmitting}
                                 invalid={!!formik.errors.confirmPassword && formik.touched.confirmPassword}
                             />)}                         
 
@@ -141,6 +146,7 @@ export const AuthForm: FC<Props> = ({isRegister, setIsRegister}) => {
                                 type='checkbox'
                                 checked={isRegister}
                                 onChange={(e) => setIsRegister(e.target.checked)}
+                                disabled={formik.isSubmitting}
                             />
                             I don't have an account. Create account.
                         </label>

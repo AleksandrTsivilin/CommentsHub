@@ -41,6 +41,7 @@ export const AddLinkForm: FC<Props> = ({onClose, onSave}) => {
                 
                 <TextField
                     label='title'
+                    type='text'
                     name='title'
                     placeholder='Enter title'
                     fieldSize='sm'
@@ -53,6 +54,7 @@ export const AddLinkForm: FC<Props> = ({onClose, onSave}) => {
 
                 <TextField 
                     label='url'
+                    type='text'
                     name='url'
                     placeholder='Enter url'   
                     fieldSize='sm'  
