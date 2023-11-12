@@ -7,6 +7,7 @@ type Props = {
     label?: string,  
     name: string,
     placeholder?: string,
+    disabled?: boolean,
     invalid?: boolean,
     reload?: {}
 } & React.InputHTMLAttributes<HTMLTextAreaElement>;
@@ -15,6 +16,7 @@ export const Captcha: FC<Props> = ({
     label,
     name,
     placeholder,
+    disabled,
     invalid=false,
     reload,
 }) => {
@@ -27,6 +29,7 @@ export const Captcha: FC<Props> = ({
                     label={label}
                     type='text'
                     placeholder={placeholder}
+                    disabled={disabled}
                     name={name}
                     invalid={invalid}
                 />

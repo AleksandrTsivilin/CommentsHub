@@ -137,6 +137,7 @@ export const AuthForm: FC<Props> = ({isRegister, setIsRegister}) => {
                             label='enter code'
                             name='captcha'
                             placeholder='Enter code'
+                            disabled={formik.isSubmitting}
                             reload={reloadCaptcha}
                             invalid={!!formik.errors.captcha && formik.touched.captcha}
                         />

@@ -104,6 +104,7 @@ export const AddCommentForm: FC<Props> = ({parentCommentId}) => {
                             label='enter code'
                             name='captcha'
                             placeholder='Enter code'
+                            disabled={formik.isSubmitting}
                             invalid={!!formik.errors.captcha && formik.touched.captcha}
                             reload={reloadCaptcha}
                         />
