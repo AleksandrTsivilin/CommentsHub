@@ -58,7 +58,8 @@ class CommentsService {
                 as: 'children',
                     include: [{
                         model: User,
-                        as: 'user'
+                        as: 'user',
+                        attributes:['userName', 'email']
                     }
                 ],
             },{
@@ -66,11 +67,13 @@ class CommentsService {
                 as: 'parent',
                 include: [{
                     model: User,
-                    as: 'user'
+                    as: 'user',
+                    attributes:['userName', 'email']
                 }]
             }, {
                 model: User,
                 as: 'user',
+                attributes:['userName', 'email']
             }
           ],
         });

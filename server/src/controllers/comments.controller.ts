@@ -53,6 +53,9 @@ class CommentsController {
           }
 
           const comment = await commentsService.getById(id);
+          if (!comment) {
+            throw ApiError.notFound('comment not found');
+          }
           res.status(200).send(comment);
         } catch (e: any) {
             next(e);
